@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:indriver_rosa/src/presentation/widgets/DefaultButton.dart';
 import 'package:indriver_rosa/src/presentation/widgets/DefaultTextField.dart';
+import 'package:indriver_rosa/src/presentation/widgets/DefaultTextFieldOutlined.dart';
 
 class RegisterContent extends StatelessWidget {
   const RegisterContent({super.key});
@@ -56,32 +57,32 @@ class RegisterContent extends StatelessWidget {
               child: Column(
                 children: [
                   _imageBanner(),
-                  DefaultTextField(
+                  DefaultTextFieldOutlined(
                     text: 'Nombre',
                     icon: Icons.person_outline,
-                    margin: EdgeInsets.only(left: 30, right: 30, top: 5),
+                    margin: EdgeInsets.only(left: 30, right: 30, top: 30),
                   ),
-                  DefaultTextField(
+                  DefaultTextFieldOutlined(
                     text: 'Apellido',
                     icon: Icons.person_2_outlined,
                     margin: EdgeInsets.only(left: 30, right: 30, top: 20),
                   ),
-                  DefaultTextField(
+                  DefaultTextFieldOutlined(
                     text: 'Email',
                     icon: Icons.email_outlined,
                     margin: EdgeInsets.only(left: 30, right: 30, top: 20),
                   ),
-                  DefaultTextField(
+                  DefaultTextFieldOutlined(
                     text: 'Teléfono',
                     icon: Icons.phone_outlined,
                     margin: EdgeInsets.only(left: 30, right: 30, top: 20),
                   ),
-                  DefaultTextField(
+                  DefaultTextFieldOutlined(
                     text: 'Password',
                     icon: Icons.lock_clock_outlined,
                     margin: EdgeInsets.only(left: 30, right: 30, top: 20),
                   ),
-                  DefaultTextField(
+                  DefaultTextFieldOutlined(
                     text: 'Confirmar Password',
                     icon: Icons.lock_clock_outlined,
                     margin: EdgeInsets.only(left: 30, right: 30, top: 20),
@@ -169,9 +170,9 @@ Widget _NotienesCuenta(){
       margin: EdgeInsets.only(top: 20),
       alignment: Alignment.center,
       child: Image.asset(
-        'assets/img/loguito.png',
-        width: 300,
-        height: 300,
+        'assets/img/trip.png',
+        width: 250,
+        height: 250,
       ),
     );
   }
