@@ -28,16 +28,17 @@ class RegisterContent extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                _textLoginRotated(),
+                _textLoginRotated(context),
                 SizedBox(height: 100),
                 _textRegisterRotated(),
-                SizedBox(height: MediaQuery.of(context).size.height * 0.25),
+                SizedBox(height: MediaQuery.of(context).size.height *0.25),
               ],
             ),
           ),
-          SingleChildScrollView(  // Envuelve el contenido para que sea desplazable
-            child: Container(
-              margin: EdgeInsets.only(left: 60, bottom: 35),
+            // Envuelve el contenido para que sea desplazable
+             Container(
+              
+              margin: EdgeInsets.only(left: 50,bottom: 35),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(35),
@@ -58,52 +59,114 @@ class RegisterContent extends StatelessWidget {
                   DefaultTextField(
                     text: 'Nombre',
                     icon: Icons.person_outline,
-                    margin: EdgeInsets.only(left: 50, right: 50, top: 50),
+                    margin: EdgeInsets.only(left: 30, right: 30, top: 5),
                   ),
                   DefaultTextField(
                     text: 'Apellido',
                     icon: Icons.person_2_outlined,
-                    margin: EdgeInsets.only(left: 20, right: 20, top: 15),
+                    margin: EdgeInsets.only(left: 30, right: 30, top: 20),
                   ),
                   DefaultTextField(
                     text: 'Email',
                     icon: Icons.email_outlined,
-                    margin: EdgeInsets.only(left: 50, right: 50, top: 15),
+                    margin: EdgeInsets.only(left: 30, right: 30, top: 20),
                   ),
                   DefaultTextField(
                     text: 'Teléfono',
                     icon: Icons.phone_outlined,
-                    margin: EdgeInsets.only(left: 50, right: 50, top: 15),
+                    margin: EdgeInsets.only(left: 30, right: 30, top: 20),
                   ),
                   DefaultTextField(
                     text: 'Password',
                     icon: Icons.lock_clock_outlined,
-                    margin: EdgeInsets.only(left: 50, right: 50, top: 15),
+                    margin: EdgeInsets.only(left: 30, right: 30, top: 20),
                   ),
                   DefaultTextField(
                     text: 'Confirmar Password',
                     icon: Icons.lock_clock_outlined,
-                    margin: EdgeInsets.only(left: 50, right: 20, top: 15),
+                    margin: EdgeInsets.only(left: 30, right: 30, top: 20),
                   ),
                   DefaultButton(
-                    text: 'Crear Usuario',
-                    onPressed: () {
-                      print('Botón presionado');
-                    },
-                    margin: EdgeInsets.only(top: 30, left: 60, right: 60),
-                  ),
+                    text: 'Registrar', 
+                    onPressed: (){},
+                    margin: EdgeInsets.only(top : 30 ,left:60,right: 60),),
+                     SizedBox(height: 10),
+                    
+                    _NotienesCuenta(),
+                    SizedBox(height: 10),
+                    _textDontHaveAccount(context),
+
+
                 ],
               ),
             ),
-          ),
+          
         ],
       ),
     );
   }
 
+Widget  _textDontHaveAccount(BuildContext context){
+    return Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            'Ya tienes una Cuenta?',
+            style: TextStyle(
+              color: Colors.grey[100],
+              fontSize: 17,
+            ),
+          ),
+          SizedBox(width: 15),
+          GestureDetector(
+            onTap: (){
+              Navigator.pushNamed(context, 'login');
+            },
+            child: Text(
+              'Iniciar Sesion',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 18
+              ),
+            ),
+          ),
+        ],
+      );
+}
+
+  
+Widget _NotienesCuenta(){
+  return  Row(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      Container(
+        width: 20,
+        height: 1,
+        color: Colors.white,
+        margin: EdgeInsets.only(right: 5),
+      ),
+      Text(
+        'O',
+        style: TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+          fontSize: 17,
+        ),
+      ),
+      Container(
+        width: 25,
+        height: 1,
+        color: Colors.white,
+        margin: EdgeInsets.only(left: 5),
+      ),
+    ],
+  );
+}
+
   Widget _imageBanner() {
     return Container(
-      margin: EdgeInsets.only(top: 60),
+      margin: EdgeInsets.only(top: 20),
       alignment: Alignment.center,
       child: Image.asset(
         'assets/img/loguito.png',
@@ -113,15 +176,20 @@ class RegisterContent extends StatelessWidget {
     );
   }
 
-  Widget _textLoginRotated() {
+  Widget _textLoginRotated(BuildContext context) {
     return RotatedBox(
       quarterTurns: 1,
-      child: Text(
-        'Login',
-        style: TextStyle(
-          fontSize: 24,
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
+      child: GestureDetector(
+        onTap: (){
+          Navigator.pushNamed(context, 'login');
+        },
+        child: Text(
+          'Login',
+          style: TextStyle(
+            fontSize: 24,
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
     );
