@@ -1,0 +1,9 @@
+/* Estamos trabajando Framework Flutter Bloc   */ 
+flutter_bloc  
+para los estados ejecutar en tiempo real , a la vez la  mas estricta  
+
+/* Comando para crear proyecto en dart */
+flutter create  --------
+
+/*  */
+

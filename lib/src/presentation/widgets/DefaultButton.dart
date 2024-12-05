@@ -12,7 +12,7 @@ class DefaultButton extends StatelessWidget {
   final IconData? iconData;
   final Color iconColor;
 
-  DefaultButton({
+   DefaultButton({
     required this.text,
     required this.onPressed, // Parámetro requerido
     this.color = Colors.white,
@@ -31,7 +31,9 @@ class DefaultButton extends StatelessWidget {
       width: width ?? MediaQuery.of(context).size.width, // Si no hay width, toma el ancho de la pantalla
       margin: margin,
       child: ElevatedButton(
-        onPressed: onPressed, // onPressed ya no necesita ser opcional
+        onPressed: (){
+          onPressed();
+        }, // onPressed ya no necesita ser opcional
         style: ElevatedButton.styleFrom(
           backgroundColor: color,
           shape: RoundedRectangleBorder(

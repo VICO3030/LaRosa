@@ -1,14 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:indriver_rosa/src/presentation/pages/auth/login/bloc/LoginBloc.dart';
+import 'package:indriver_rosa/src/presentation/pages/auth/login/bloc/LoginEvent.dart';
+import 'package:indriver_rosa/src/presentation/pages/auth/login/bloc/LoginState.dart';
+import 'package:indriver_rosa/src/presentation/utils/BlocFormItem.dart';
 import 'package:indriver_rosa/src/presentation/widgets/DefaultButton.dart';
 import 'package:indriver_rosa/src/presentation/widgets/DefaultTextField.dart';
 
 class LoginContent extends StatelessWidget {
-  const LoginContent({super.key});
+
+  LoginState  state ;
+   
+   LoginContent(this.state);
 
  @override
 Widget build(BuildContext context) {
-  return Scaffold( // Aseguramos que haya un Scaffold que proporcione un contexto de Material
-    body: Stack(
+  return Form( // Aseguramos que haya un Scaffold que proporcione un contexto de Material
+    key: state.formKey,
+    child: Stack(
       children: [
         Container(
           height: MediaQuery.of(context).size.height,
@@ -27,6 +37,7 @@ Widget build(BuildContext context) {
           ),
         ),
         Container(
+          height: MediaQuery.of(context).size.height,
           margin: EdgeInsets.only(left: 60),
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -44,60 +55,85 @@ Widget build(BuildContext context) {
           ),
           child: Container(
             margin: EdgeInsets.only(left: 25, right: 25),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: 70),
-                Text(
-                  'BIENVENIDOS',
-                  style: TextStyle(
-                    fontSize: 45,
-                    color: const Color.fromARGB(211, 200, 200, 24),
-                    fontWeight: FontWeight.bold
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 70),
+                  Text(
+                    'BIENVENIDOS',
+                    style: TextStyle(
+                      fontSize: 45,
+                      color: const Color.fromARGB(211, 200, 200, 24),
+                      fontWeight: FontWeight.bold
+                    ),
                   ),
-                ),
-                Container(
-                  alignment: Alignment.center,
-                  child: Image.asset(
-                    'assets/img/car.png',
-                    width: 350,
-                    height: 350,
+                  Container(
+                    alignment: Alignment.center,
+                    child: Image.asset(
+                      'assets/img/car.png',
+                      width: 350,
+                      height: 350,
+                    ),
                   ),
-                ),
-                Text(
-                  'Log in',
-                  style: TextStyle(
-                    fontSize: 24,
-                    color: const Color.fromARGB(211, 200, 200, 24),
-                    fontWeight: FontWeight.bold
+                  Text(
+                    'Log in',
+                    style: TextStyle(
+                      fontSize: 24,
+                      color: const Color.fromARGB(211, 200, 200, 24),
+                      fontWeight: FontWeight.bold
+                    ),
                   ),
-                ),
+                   DefaultTextField
+                 (
+                  onChanged: (text){
+                    context.read<LoginBloc>().add(EmailChanged(email: BlocFormItem(value: text)));
+                  },
+                  validator:(value) {
+                    return context.read<LoginBloc>().state.email.error;
+                  },
+                  text: 'Email', 
+                 icon: Icons.email_outlined,
+                 margin: EdgeInsets.only(top:20, left: 10 , right: 10)
+                 
+                 ),
                  DefaultTextField
-               (
-                text: 'Email', 
-               icon: Icons.email_outlined,
-               margin: EdgeInsets.only(top:20, left: 10 , right: 10)
-               
-               ),
-               DefaultTextField
-               (text: 'Constrasania',
-                icon: Icons.lock_clock_outlined,
-                 margin: EdgeInsets.only(top:25, left: 10 , right: 10),
-               
-                )
-                ,
-                Spacer(),
-                DefaultButton(
-                  text: 'LOGIN',
-                  color: const Color.fromARGB(31, 0, 0, 0),
-                  textColor: Colors.yellow,
-                  onPressed: () {},
-                ),
-                _NotienesCuenta(),
+                 (
+                  onChanged: (text){   
+                    context.read<LoginBloc>().add(PasswordChanged(password: BlocFormItem(value: text)));       
+                  },
+                  validator:(value) {
+                    return context.read<LoginBloc>().state.password.error;
+                  },
+                  text: 'Constrasania',
+                  icon: Icons.lock_clock_outlined,
+                   margin: EdgeInsets.only(top:25, left: 10 , right: 10),
+                 
+                  )
+                  ,
+                  //Spacer(),
+                  SizedBox(height: MediaQuery.of(context).size.height  * 0.09 ),
+                  DefaultButton(
+                    text: 'LOGIN',
+                    color: const Color.fromARGB(31, 0, 0, 0),
+                    textColor: Colors.yellow,
+                    onPressed: () {
+                      if(state.formKey!.currentState!.validate()){
+                            context.read<LoginBloc>().add(FormSubmit());
 
-                SizedBox(height: 30),
-                _textDontHaveAccount(context),
-              ],
+                      }
+                      else{
+                        print('El formulario no es valido!');
+                      }
+                     
+                    },
+                  ),
+                  _NotienesCuenta(),
+              
+                  SizedBox(height: 30),
+                  _textDontHaveAccount(context),
+                ],
+              ),
             ),
           ),
         ),

@@ -4,11 +4,17 @@ class DefaultTextFieldOutlined extends StatelessWidget {
   String text;
   IconData icon;
   EdgeInsetsGeometry margin;
+  Function (String text) onChanged; 
+    String? Function(String?)? validator;  
+  
 
   DefaultTextFieldOutlined({
     required this.text,
     required this.icon,
+    required  this.onChanged,
     this.margin= const EdgeInsets.only(top: 50, left: 20, right: 20),
+    this.validator
+    
   });
 
   @override
@@ -17,26 +23,35 @@ class DefaultTextFieldOutlined extends StatelessWidget {
       height: 45,
       margin: margin,
       decoration: BoxDecoration(
-        color: Colors.white,
+        
+
+        color: Color.fromRGBO(255,255,255,0.2 ),
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(15),
           bottomRight: Radius.circular(15),
         ),
       ), // BoxDecoration
       child: TextFormField(
+          onChanged:(text){
+          onChanged(text);
+        },
+        validator: validator,
+
+
         decoration: InputDecoration(
           label: Text(text),
          // border: InputBorder.none,
+         
          focusedBorder:OutlineInputBorder(
           borderSide: BorderSide(
-            color:Colors.blue,
-            width: 5
+            color:Color.fromARGB(255, 13, 167, 213)  ,
+            width: 2
           )
          ) ,
           enabledBorder:OutlineInputBorder(
           borderSide: BorderSide(
-            color:Colors.blueGrey,
-            width: 5
+            color:const Color.fromARGB(255, 109, 138, 153),
+            width: 2
           )
          ) ,
           prefixIcon: Container(
